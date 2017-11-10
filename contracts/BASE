@@ -1,0 +1,19 @@
+pragma solidity ^0.4.8;
+contract Base {
+
+  string request_transaction_id ;
+  string linking_id ;
+
+function set(string transaction_id, string linking_id_details) {
+    request_transaction_id = transaction_id;
+    linking_id = linking_id_details;
+
+  }
+function get_transaction_id() constant returns (string) {
+    return request_transaction_id;
+  }
+function get_linking_id() constant returns (string) {
+    return linking_id ;
+  }
+
+}
