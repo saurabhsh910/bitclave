@@ -28,9 +28,16 @@ App = {
 
       // Set the provider for our contract.
       App.contracts.CatToken.setProvider(App.web3Provider);
-
-      // Use our contract to retieve and mark the adopted pets.
       return App.getBalances();
+    });
+
+    $.getJSON('Base.json', function(data) {
+      // Get the necessary contract artifact file and instantiate it with truffle-contract.
+      var BaseArtifact = data;
+      App.contracts.Base = TruffleContract(BaseArtifact);
+
+      // Set the provider for our contract.
+      App.contracts.Base.setProvider(App.web3Provider);
     });
 
     return App.bindEvents();
@@ -38,6 +45,8 @@ App = {
 
   bindEvents: function() {
     $(document).on('click', '#transferButton', App.handleTransfer);
+    $(document).on('click', '#requestButton', App.handleSearch);
+    $(document).on('click', '#findRequestButton', App.handleGetRequest);
   },
 
   handleTransfer: function() {
@@ -64,6 +73,59 @@ App = {
       }).then(function(result) {
         alert('Transfer Successful!');
         return App.getBalances();
+      }).catch(function(err) {
+        console.log(err.message);
+      });
+    });
+  },
+
+  handleRequest: function() {
+    event.preventDefault();
+    
+    var BaseInstance;
+    var pseudonymID = $('#TTPseudonymTerm').val();
+    var searchTerm = $('#TTSearchTerm').val();
+    var sodium = require('libsodium-wrappers');
+    var transactionID = "123456789";//sodium.randombytes_random();
+    var linkingID = "1240875230985234";
+
+    console.log('Transaction ID generated: ' + transactionID);
+    web3.eth.getAccounts(function(error, accounts) {
+      if (error) {
+          console.log(error);
+      }
+  
+      var account = accounts[0];
+      App.contracts.Base.deployed().then(function(instance) {
+        BaseInstance = instance;
+        return BaseInstance.createRequest(transactionID, linkingID, pseudonymID, searchTerm, {from: account});
+      }).then(function(result) {
+        alert('Create Request Successful!');
+      }).catch(function(err) {
+        console.log(err.message);
+      });
+    });
+  },
+
+  handleGetRequest: function(adopters, account) {
+    console.log('Getting Request...');
+
+    var BaseInstance;
+    var pseudonymID = $('#TTTransactionID').val();
+    
+    web3.eth.getAccounts(function(error, accounts) {
+      if (error) {
+        console.log(error);
+      }
+
+      var account = accounts[0];
+
+      App.contracts.Base.deployed().then(function(instance) {
+        BaseInstance = instance;
+
+        return BaseInstance.getRequest(pseudonymID);
+      }).then(function(result) {
+        console.log(result);
       }).catch(function(err) {
         console.log(err.message);
       });

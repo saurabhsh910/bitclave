@@ -21,7 +21,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-push-2">
-          <h1 class="text-center">CatToken</h1>
+          <h1 class="text-center">BitClave Demo</h1>
           <hr/>
           <br/>
         </div>
@@ -40,6 +40,20 @@
               <input type="text" class="form-control" id="TTTransferAddress" placeholder="Address" />
               <input type="text" class="form-control" id="TTTransferAmount" placeholder="Amount" />
               <button class="btn btn-primary" id="transferButton" type="button">Transfer</button>
+              <h4>Search Item (CreateRequest)</h4>
+              <h5>This simulates searching for item and posts a Request block in the blockchain</h5>
+              <input type="text" class="form-control" id="TTPseudonymTerm" placeholder="Pseudonym 1" />
+              <input type="text" class="form-control" id="TTSearchTerm" placeholder="e.g. Cars" />
+              <button id="requestButton" type="button">CreateRequest</button>
+              <h4>FindRequest</h4>
+              <h5>This searches for a Request block in the blockchain</h5>
+              <input type="text" class="form-control" id="TTTransactionID" placeholder="transaction_id" />
+              <button id="findRequestButton" type="button">FindRequest</button>
+              <h4>Request Info</h4>              
+              <strong>Transaction ID</strong>: <span id="TTInfoTransactionID"></span> TT<br/><br/>
+              
+
+
             </div>
           </div>
         </div>
