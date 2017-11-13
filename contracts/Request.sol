@@ -16,10 +16,12 @@ contract Request{
 	}
 	
 	CustomerInfo c ;
+	mapping(string => CustomerInfo)  keys;
 	 
 	function set_customer_details( string t_id , string l_id , string search_name){
 		CustomerInfo memory customer = CustomerInfo({transaction_id : t_id, linking_id : l_id, pseudonym_id: msg.sender, activity_type: "request", search_term: search_name }) ;
 		c = customer;
+		keys[t_id] = customer;
 	}
 
 	function get_transaction_id() constant returns (string) {
@@ -29,4 +31,9 @@ contract Request{
 	function get_linking_id() constant returns (string) {
     	return c.linking_id;
 	}
+
+	function get_transaction_details(string t_id) constant returns (address) {
+    	return keys[t_id].pseudonym_id;
+	}
+
 }
