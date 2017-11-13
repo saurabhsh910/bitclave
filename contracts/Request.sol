@@ -21,7 +21,9 @@ contract Request{
 	function set_customer_details( string t_id , string l_id , string search_name){
 		CustomerInfo memory customer = CustomerInfo({transaction_id : t_id, linking_id : l_id, pseudonym_id: msg.sender, activity_type: "request", search_term: search_name }) ;
 		c = customer;
-		keys[t_id] = customer;
+		keys[t_id].transaction_id = t_id;
+		keys[t_id].linking_id = l_id;
+		keys[t_id].search_term = search_name;
 	}
 
 	function get_transaction_id() constant returns (string) {
@@ -32,8 +34,8 @@ contract Request{
     	return c.linking_id;
 	}
 
-	function get_transaction_details(string t_id) constant returns (address) {
-    	return keys[t_id].pseudonym_id;
+	function get_transaction_details(string t_id) constant returns (string) {
+    	return keys[t_id].search_term;
 	}
 
 }

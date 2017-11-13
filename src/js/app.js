@@ -85,20 +85,22 @@ App = {
     var RequestInstance;
     var pseudonymID = $('#TTPseudonymTerm').val();
     var searchTerm = $('#TTSearchTerm').val();
-    //var sodium = require('libsodium-wrappers');
-    var transactionID = "123456789";//sodium.randombytes_random();
+    //var sodium = require('../../node_modules/libsodium-wrappers/dist/modules/libsodium-wrappers');
+    //var testint = sodium.randombytes_random();;
+    //console.log(testint);
+    var transactionID = Math.floor(Math.random()*10000).toString();
     var linkingID = "1240875230985234";
 
     console.log('Transaction ID generated: ' + transactionID);
     web3.eth.getAccounts(function(error, accounts) {
       if (error) {
-          console.log(error);
+        console.log(error);
       }
   
-      //var account = accounts[0];
+      var account = accounts[0];
       App.contracts.Request.deployed().then(function(instance) {
         RequestInstance = instance;
-        return RequestInstance.set_customer_details(transactionID, linkingID, searchTerm/*, {from: account}*/);
+        return RequestInstance.set_customer_details(transactionID, linkingID, searchTerm, {from: account});
       }).then(function(result) {
         alert('Create Request Successful!');
       }).catch(function(err) {
@@ -111,7 +113,7 @@ App = {
     console.log('Getting Request...');
 
     var RequestInstance;
-    var pseudonymID = $('#TTTransactionID').val();
+    var transactionID = $('#TTTransactionID').val();
     
     web3.eth.getAccounts(function(error, accounts) {
       if (error) {
@@ -122,8 +124,8 @@ App = {
 
       App.contracts.Request.deployed().then(function(instance) {
         RequestInstance = instance;
-
-        return RequestInstance.get_transaction_id();
+        
+        return RequestInstance.get_transaction_details(transactionID);
       }).then(function(result) {
         console.log(result);
       }).catch(function(err) {
