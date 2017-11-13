@@ -1,11 +1,9 @@
 var Base = artifacts.require("./Base.sol");
 var Request = artifacts.require("Request.sol");
+var CatToken = artifacts.require("CatToken.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(Base);
-};
-
-module.exports = function(deployer) {
+  deployer.deploy(Base);  
   deployer.deploy(Request);
+  deployer.deploy(CatToken);
 };
-
