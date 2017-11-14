@@ -4,11 +4,12 @@ contract Request{
 	
 	struct CustomerInfo{
 
-		string transaction_id ;
-		string linking_id ;
+		bytes32 transaction_id ;
+		bytes32 linking_id ;
 		address pseudonym_id ;
-		string activity_type ;
-		string search_term ;
+		bytes32 activity_type ;
+		bytes32 search_term ;
+		bool isEntity ;
 		// string time_stamp ;
 		// string encrypted_blob ;
 		// string signed_digest_private_link_id ;
@@ -16,26 +17,31 @@ contract Request{
 	}
 	
 	CustomerInfo c ;
-	mapping(string => CustomerInfo)  keys;
+	mapping(bytes32 => CustomerInfo)  public request_database;
 	 
-	function set_customer_details( string t_id , string l_id , string search_name){
-		CustomerInfo memory customer = CustomerInfo({transaction_id : t_id, linking_id : l_id, pseudonym_id: msg.sender, activity_type: "request", search_term: search_name }) ;
+	function set_customer_details( bytes32 t_id , bytes32 l_id , bytes32 search_name){
+		CustomerInfo memory customer = CustomerInfo({transaction_id : t_id, linking_id : l_id, pseudonym_id: msg.sender, activity_type: "request", search_term: search_name, isEntity: true }) ;
 		c = customer;
-		keys[t_id].transaction_id = t_id;
-		keys[t_id].linking_id = l_id;
-		keys[t_id].search_term = search_name;
+		request_database[t_id].transaction_id = t_id;
+		request_database[t_id].linking_id = l_id;
+		request_database[t_id].search_term = search_name;
+		request_database[t_id].isEntity = true;
 	}
 
-	function get_transaction_id() constant returns (string) {
+	function get_transaction_id() constant returns (bytes32) {
     	return c.transaction_id;
 	}
 	
-	function get_linking_id() constant returns (string) {
+	function get_linking_id() constant returns (bytes32) {
     	return c.linking_id;
 	}
 
-	function get_transaction_details(string t_id) constant returns (string) {
-    	return keys[t_id].search_term;
+	function get_transaction_details(bytes32 t_id) constant returns (bytes32) {
+    	return request_database[t_id].search_term;
+	}
+
+	function get_isEntity(bytes32 t_id) constant returns (bool){
+		return request_database[t_id].isEntity;
 	}
 
 }
