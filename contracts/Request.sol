@@ -20,13 +20,17 @@ contract Request{
 	mapping(bytes32 => CustomerInfo)  public request_database;
 	 
 	function set_customer_details( bytes32 t_id , bytes32 l_id , bytes32 search_name){
-		CustomerInfo memory customer = CustomerInfo({transaction_id : t_id, linking_id : l_id, pseudonym_id: msg.sender, activity_type: "request", search_term: search_name, isEntity: true }) ;
+		
+		request_database[t_id] = CustomerInfo({transaction_id : t_id, linking_id : l_id, pseudonym_id: msg.sender, activity_type: "request", search_term: search_name, isEntity: true });
+/*		CustomerInfo memory customer = CustomerInfo({transaction_id : t_id, linking_id : l_id, pseudonym_id: msg.sender, activity_type: "request", search_term: search_name, isEntity: true }) ;
 		c = customer;
 		request_database[t_id].transaction_id = t_id;
 		request_database[t_id].linking_id = l_id;
 		request_database[t_id].search_term = search_name;
 		request_database[t_id].isEntity = true;
-	}
+*/	}
+
+	
 
 	function get_transaction_id() constant returns (bytes32) {
     	return c.transaction_id;
