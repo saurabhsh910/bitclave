@@ -1,0 +1,101 @@
+{
+  "contract_name": "ViewOffer",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "view_database",
+      "outputs": [
+        {
+          "name": "view_transaction_id",
+          "type": "bytes32"
+        },
+        {
+          "name": "offer_id",
+          "type": "bytes32"
+        },
+        {
+          "name": "linking_id",
+          "type": "bytes32"
+        },
+        {
+          "name": "activity_type",
+          "type": "bytes32"
+        },
+        {
+          "name": "verify",
+          "type": "bytes32"
+        },
+        {
+          "name": "proof_of_view",
+          "type": "bytes32"
+        },
+        {
+          "name": "private_linking_id",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "view_id",
+          "type": "bytes32"
+        },
+        {
+          "name": "offer_details",
+          "type": "bytes32"
+        },
+        {
+          "name": "linking_details",
+          "type": "bytes32"
+        },
+        {
+          "name": "verify_details",
+          "type": "bytes32"
+        },
+        {
+          "name": "proof_of_view_details",
+          "type": "bytes32"
+        },
+        {
+          "name": "private_linking_id_details",
+          "type": "bytes32"
+        }
+      ],
+      "name": "view_offer",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "view_transaction_id",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "offer_id",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ViewGoods",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000f57600080fd5b5b6102968061001f6000396000f300606060405263ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166382a298b78114610048578063a4103d751461009c575b600080fd5b341561005357600080fd5b61005e6004356100c3565b60405196875260208701959095526040808701949094526060860192909252608085015260a084015260c083019190915260e0909101905180910390f35b34156100a757600080fd5b6100c160043560243560443560643560843560a4356100ff565b005b60016020819052600091825260409091208054918101546002820154600383015460048401546005850154600690950154939492939192909187565b60e0604051908101604090815287825260208083018890528183018790527f766965770000000000000000000000000000000000000000000000000000000060608401526080830186905260a0830185905260c083018490526000888152600190915220815181556020820151600182015560408201516002820155606082015160038201556080820151600482015560a0820151600582015560c08201516006909101555060005473ffffffffffffffffffffffffffffffffffffffff1663674b8f96866040517c010000000000000000000000000000000000000000000000000000000063ffffffff84160281526004810191909152602401600060405180830381600087803b151561021357600080fd5b6102c65a03f1151561022457600080fd5b5050507fe27f6718e79e5403eb718c5697e5217e90c7e2c70eb3a6fee5c5cadccc63e92d868660405191825260208201526040908101905180910390a15b5050505050505600a165627a7a72305820a46c8af95f14ecba9d373248ac6a4ab1d683594516ba3e6b33031179fd033f400029",
+  "networks": {},
+  "schema_version": "0.0.5",
+  "updated_at": 1510740205082
+}
