@@ -2,10 +2,12 @@ var Base = artifacts.require("./Base.sol");
 var Request = artifacts.require("Request.sol");
 var CatToken = artifacts.require("CatToken.sol");
 var Offer = artifacts.require("Offer.sol");
+var ViewOffer = artifacts.require("ViewOffer.sol");
 
 module.exports = function(deployer) {
   deployer.deploy(Base);  
   deployer.deploy(Request);
   deployer.deploy(CatToken);
   deployer.deploy(Offer);
+  deployer.deploy(ViewOffer);
 };
