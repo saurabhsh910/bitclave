@@ -100,7 +100,7 @@ App = {
       var account = accounts[0];
       App.contracts.Request.deployed().then(function(instance) {
         RequestInstance = instance;
-        return RequestInstance.set_customer_details(transactionID, linkingID, searchTerm, {from: account});
+        return RequestInstance.createRequest(transactionID, linkingID, searchTerm, {from: account});
       }).then(function(result) {
         alert('Create Request Successful!');
       }).catch(function(err) {
